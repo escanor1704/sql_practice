@@ -15,6 +15,7 @@ FROM (SELECT UNNEST(features) AS f
 select * from neighbourhood_dim limit 5;
 -- select count(*) from neighbourhood_dim;
 
+
 select '==== loading host_dim===='as info;
 insert into host_dim(host_id, host_name, host_since, host_is_superhost, host_listings_count)
 select
@@ -28,6 +29,7 @@ GROUP BY host_id;
 
 select * from host_dim limit 5;
 -- select count(*) from host_dim;
+
 
 select '==== loading listing_dim===='as info;
 insert into listing_dim(
@@ -57,6 +59,7 @@ ON l.neighbourhood_cleansed = n.neighbourhood;
 select * from listing_dim limit 5;
 -- select count(*) from listing_dim;
 
+
 select '==== loading amenity_dim===='as info;
 insert into amenity_dim(amenity_id, amenity)
 select
@@ -69,6 +72,7 @@ from(
 
 select * from amenity_dim limit 5;
 -- select count(*) from amenity_dim;
+
 
 select '==== loading listing_amenity_bridge===='as info;
 insert into listing_amenity_bridge(listing_id, amenity_id)
@@ -85,6 +89,7 @@ JOIN amenity_dim AS a ON a.amenity = l.amenity;
 select * from listing_amenity_bridge limit 5;
 -- select count(*) from listing_amenity_bridge;
 
+
 select '==== loading review_fact===='as info;
 INSERT INTO review_fact (review_id, listing_id, host_id, neighbourhood_id, review_date, comment_length)
 SELECT
@@ -100,6 +105,7 @@ QUALIFY ROW_NUMBER() OVER (PARTITION BY r.id ORDER BY r.listing_id) = 1;
 
 select * from review_fact limit 5;
 -- select count(*) from review_fact;
+
 
 select '==== loading calendar_fact===='as info;
 insert into calender_fact(
