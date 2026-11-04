@@ -115,3 +115,15 @@ where d.year in (2019, 2020, 2021)
 group by d.year
 order by d.year;
 
+select '== review count compare ==' as info;
+select
+sum(listings_reviewed) as mart_sum,
+from review_mart.fact_review_monthly f
+join review_mart.dim_date_month d
+on f.month_start_date = d.month_start_date
+where d.year = 2025;
+
+select
+count(distinct listing_id) as real_listings
+from review_fact
+where extract(year from review_date) = 2025;
