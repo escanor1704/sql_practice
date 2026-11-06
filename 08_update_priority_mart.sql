@@ -49,3 +49,4 @@ median(price_per_night) as median_price
 from priority_mart.priority_listing
 group by priority_lvl
 order by priority_lvl;
+
